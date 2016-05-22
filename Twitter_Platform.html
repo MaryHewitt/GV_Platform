@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./public/stylesheets/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="d3.layout.cloud.js"></script>
+    <script src="./node_modules/vis/dist/vis.min.js"></script>
+    <script src="./public/javascripts/index.js"></script>
+
+    <title>Twitter Geovisualisation</title>
+    
+  </head>
+
+  <body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    
+    <div id="map"></div>
+
+    <div id="databox">
+      <div id="controlbox">Controls:<br>
+        <!--<input type="button" id="trends" value="Show Trends"></input>-->
+        <!--<input type="button" id="twitter" value="Run Twitter Geolocation"></input>-->
+        <!--<input type="button" id="oauth" value="Get oAuth Token"></input>-->
+        <input type="button" id="twit_btn" class = "button"  value="Retrieve Tweets"></input><br>
+        <br><br>
+        <input type="button" id="timeline_btn" class = "button"  value="Show Timeline" disabled></input><br>
+        <input type="button" id="wordcloud_btn" class = "button"  value="Show Wordcloud" disabled></input>
+      </div>
+      <div id="statbox">Click on the map to explore!</div>
+      <div id="wordcloud" hidden>
+        <div class = "cross">
+        <image id = "wc_close" class = "close" src = "./public/images/cross.png" alt = "close_btn" style = "width:10px;height:10px;"></image>
+        </div>
+      </div>
+      <div id="details">Created by Mary Hewitt</div>
+    </div>
+
+    <div id = "time_vis" hidden> hello
+      <div class = "cross">
+        <image id = "tl_close" class = "close" src = "./public/images/cross.png" alt = "close_btn" style = "width:20px;height:20px;"></image>
+      </div>
+      <div id = "timeline"></div>
+    </div>
+
+    <script>
+      $('#twit_btn').click(function() {  //Trying to use node server and use Twit
+        console.log('Twit Button Pressed');
+        $.ajax({
+          method: "POST",
+          url: "http://localhost:8080/echo/mark"
+        })
+        .done(function() {
+          console.log( "Twit - Process Success" );
+          console.log(data);
+          $('#wordcloud_btn').prop('disabled','false');
+          $('#timeline_btn').prop('disabled','false');
+        })
+        .fail(function() {
+          console.log( "Twit - Process Error" );
+        })
+        .always(function() {
+          console.log( "Twit - Process Completed" );
+        });
+      });
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNOyqpoK1WaGwLhiZt6RV2An4ARxPL1j8&libraries=places&callback=initAutocomplete" async defer></script>
+  
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "twitterplatform",
+  "version": "1.0.0",
+  "description": "Thesis application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "restify": "^4.0.4",
+    "twit": "^2.2.4"
+  }
+}
