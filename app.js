@@ -29,9 +29,9 @@ router.get('/test', function(req, res) {
   res.send("I'm on the test page!");
 });
 
-router.post('/test', function(req, res) {
-  console.log('Posting');
-  res.send('Hello post!');
+router.post('/test', function(req, res, next) {
+  console.log('Posting to test');
+  res.send('Hello POST! Test Success!');
   next();
 });
 
@@ -67,8 +67,6 @@ app.configure(function() {
   //Parses the JSON object given in the body request
     app.use(express.bodyParser());
 });*/
-
-console.log('Server is running!');
 
 var port = 5000;
 app.listen( port, function() {
