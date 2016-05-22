@@ -3,13 +3,13 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="./public/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="d3.layout.cloud.js"></script>
-    <script src="./node_modules/vis/dist/vis.min.js"></script>
-    <script src="./public/javascripts/index.js"></script>
+
+    <script src="./javascripts/d3.layout.cloud.js"></script>
+    <script src="./javascripts/index.js"></script>
 
     <title>Twitter Geovisualisation</title>
     
@@ -33,7 +33,7 @@
       <div id="statbox">Click on the map to explore!</div>
       <div id="wordcloud" hidden>
         <div class = "cross">
-        <image id = "wc_close" class = "close" src = "./public/images/cross.png" alt = "close_btn" style = "width:10px;height:10px;"></image>
+        <image id = "wc_close" class = "close" src = "./images/cross.png" alt = "close_btn" style = "width:10px;height:10px;"></image>
         </div>
       </div>
       <div id="details">Created by Mary Hewitt</div>
@@ -41,7 +41,7 @@
 
     <div id = "time_vis" hidden> hello
       <div class = "cross">
-        <image id = "tl_close" class = "close" src = "./public/images/cross.png" alt = "close_btn" style = "width:20px;height:20px;"></image>
+        <image id = "tl_close" class = "close" src = "./images/cross.png" alt = "close_btn" style = "width:20px;height:20px;"></image>
       </div>
       <div id = "timeline"></div>
     </div>

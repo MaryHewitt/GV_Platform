@@ -9,6 +9,8 @@
 //http://stackoverflow.com/questions/28516951/calling-method-in-node-js-from-browser-using-express
 //http://stackoverflow.com/questions/21317981/cannot-get-nodejs-error
 //http://stackoverflow.com/questions/29986571/cannot-get-when-trying-to-connect-to-localhost8080-in-node-js
+//http://expressjs.com/en/starter/static-files.html
+//http://stackoverflow.com/questions/26079611/node-js-typeerror-path-must-be-absolute-or-specify-root-to-res-sendfile-failed
 
 var express = require('express');
 var app = express();
@@ -17,6 +19,10 @@ var router = express.Router();
 //require("./routes/twitter")(router);
 app.use("./api",router);
 
+app.use(express.static(__dirname +'/public'));
+//app.use(express.static(__dirname +'/javascripts'));
+//app.use(express.static(__dirname +'/stylesheets'));
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -24,7 +30,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res, next) {
-  res.send("Hello world");
+  res.sendFile(__dirname + '/Twitter_Platform.html');
 });
 
 var allowCrossDomain = function(req, response, next) {

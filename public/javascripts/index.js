@@ -59,7 +59,7 @@ function getWOEID(){
     })
     .always(function() {
       console.log( "WOEID Retreival - Process Complete" );
-      $('#statbox').append('\nWOEID: ' + woeid);
+      $('#statbox').append('\n\nWOEID: ' + woeid);
     })
 };
 
