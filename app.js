@@ -25,11 +25,11 @@ router.use(function (req, res, next) {
   next();
 });
 
-router.get('/about', function(req, res) {
-  res.send("I'm on the about page!");
+router.get('/test', function(req, res) {
+  res.send("I'm on the test page!");
 });
 
-router.post('/about', function(req, res) {
+router.post('/test', function(req, res) {
   console.log('Posting');
   res.send('Hello post!');
   next();

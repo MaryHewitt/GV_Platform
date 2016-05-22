@@ -18,13 +18,14 @@ $(document).ready(function(){
     console.log('Twit Button Pressed');
     $.ajax({
       method: "POST",
-      url: "http://localhost:5000/about"
+      url: "http://localhost:5000/test"
     })
     .done(function(data) {
       console.log( "Twit - Process Success" );
       console.log(data);
-      $('#wordcloud_btn').prop('disabled','false');
-      $('#timeline_btn').prop('disabled','false');
+      $('#wordcloud_btn').removeAttr('disabled');
+      $('#timeline_btn').removeAttr('disabled');
+      createWC();
     })
     .fail(function() {
       console.log( "Twit - Process Error" );
@@ -180,7 +181,7 @@ $(document).ready(function(){
   //TIME-LINE:
   //vis.js
 
-  $('#timeline_btn').one('click',function(){
+  $('#timeline_btn').click(function(){
     
     $('#time_vis').show();
     //Below isn't working, does it need to be done via node server?
@@ -211,10 +212,11 @@ $(document).ready(function(){
   //Adapted from the following question:
   //http://stackoverflow.com/questions/27672989/dynamically-sized-word-cloud-using-d3-cloud
 
-  $('#wordcloud_btn').one('click',function(){
-
+  $('#wordcloud_btn').click(function(){
     $('#wordcloud').show();
+  });
 
+  function createWC() {
     myArray = [{"text":"First","size":15},{"text":"Not","size":29},{"text":"Bird","size":20},{"text":"Hello","size":40},{"text":"Word","size":10},{"text":"Marketplaces","size":30}]
     var fillColor = d3.scale.category20b();
     var w = 270, // if you modify this also modify .append("g") .attr -- as half of this
@@ -248,7 +250,7 @@ $(document).ready(function(){
         )
       .text(function(d) { return d.text; });
      }
-  });
+  }
 
   $('#wc_close').click(function(){
     $('#wordcloud').hide();
