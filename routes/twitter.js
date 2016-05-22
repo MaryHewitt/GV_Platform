@@ -1,9 +1,8 @@
 module.exports = function(router)
 {
-	router.route('/users/')
-		.post('/twitter', function(req, res, next) {
-		  var latitude = req.body.latitude;
-		  res.sendStatus();
+	router.route('/twitter')
+		.post(function(req, res, next) {
+		  console.log('Twitter accessed');
 		  next();
 		  /*var Twit = require('twit');
 

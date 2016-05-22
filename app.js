@@ -12,6 +12,8 @@
 //http://expressjs.com/en/starter/static-files.html
 //http://stackoverflow.com/questions/26079611/node-js-typeerror-path-must-be-absolute-or-specify-root-to-res-sendfile-failed
 //https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4
+//?//http://blog.landspurg.net/node-js-tutorial-real-time-geolocalized-tweets/
+//?//http://blog.safe.com/2014/03/twitter-stream-api-map/
 
 
 
@@ -35,6 +37,27 @@ router.post('/test', function(req, res, next) {
   next();
 });
 
+router.post('/twitter', function(req, res, next) {
+  console.log('Posting to Twitter');
+  res.send('Hello POST! Twitter Success!');
+
+  var Twit = require('twit');
+
+    var T = new Twit({
+      consumer_key:         'w66tWmtsphzxLdUJpS03cVKuE',
+      consumer_secret:      'BOJ4VxwsgJVjuhWIEQIslCRUrud83gVmEJKnGNv4xaysc1kv91',
+      access_token:         '389868811-hALJlOtoPVFm9kymPexSiEgevwtI3S6dNhDMLWmQ',
+      access_token_secret:  '31TWHRd6w8UWFEHmNMBZcCbZuU1XqqSbCoD2APMPynZVp',
+      timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+    });
+
+    T.get('search/tweets', { q: 'fire', locations: ['-31.9535', '115.8570'], language: 'en', count: 100 }, function(err, data, response) {
+      console.log(data);
+    });
+
+  next();
+});
+
 app.use('/', router);
 
 app.use(express.static(__dirname +'/public'));
@@ -42,31 +65,6 @@ app.use(express.static(__dirname +'/public'));
 app.get('/', function(req, res, next) {
   res.sendFile(__dirname + '/Twitter_Platform.html');
 });
-
-/*app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});*/
-
-/*var allowCrossDomain = function(req, response, next) {
-  response.header('Access-Control-Allow-Origin', "http://localhost");
-  response.header('Access-Control-Allow-Methods', 'OPTIONS, GET,PUT,POST,DELETE');
-  response.header('Access-Control-Allow-Headers', 'Content-Type');
-
-  if ('OPTIONS' == req.method) {
-    response.send(200);
-  }
-  else {
-    next();
-  }
-};
-
-app.configure(function() {
-    app.use(allowCrossDomain);
-  //Parses the JSON object given in the body request
-    app.use(express.bodyParser());
-});*/
 
 var port = 5000;
 app.listen( port, function() {

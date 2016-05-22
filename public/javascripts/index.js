@@ -10,6 +10,28 @@ $(document).ready(function(){
   var woeid = null;
   var keyword = "traffic";
 
+  //TEST BUTTON AJAX:
+  //===============================================
+
+  $('#test_btn').click(function(){
+    console.log('Test Button!');
+    $.ajax({
+      method: "POST",
+      url: "http://localhost:5000/twitter"
+    })
+    .done(function(data) {
+      console.log( "TEST - Success" );
+      console.log(data);
+    })
+    .fail(function() {
+      console.log( "TEST - Error" );
+    })
+    .always(function() {
+      console.log( "TEST - Completed" );
+    });
+  });
+
+
   //Twit NPM
   //Referenced from:
   //https://github.com/ttezel/twit
