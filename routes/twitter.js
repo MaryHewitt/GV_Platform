@@ -1,9 +1,11 @@
 module.exports = function(router)
 {
 	router.route('/users/')
-		.post('/routes/twitter', function(req, res) {
-		  console.log('Twitter Search Button Pressed!');
-		  var Twit = require('twit');
+		.post('/twitter', function(req, res, next) {
+		  var latitude = req.body.latitude;
+		  res.sendStatus();
+		  next();
+		  /*var Twit = require('twit');
 
 		  var T = new Twit({
 		    consumer_key:         'w66tWmtsphzxLdUJpS03cVKuE',
@@ -18,6 +20,6 @@ module.exports = function(router)
 		  //
 		  T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, data, response) {
 		    console.log(data);
-		  });
+		  });*/
 		});
 }

@@ -46,28 +46,6 @@
       <div id = "timeline"></div>
     </div>
 
-    <script>
-      $('#twit_btn').click(function() {  //Trying to use node server and use Twit
-        console.log('Twit Button Pressed');
-        $.ajax({
-          method: "POST",
-          url: "http://localhost:8080/echo/mark"
-        })
-        .done(function() {
-          console.log( "Twit - Process Success" );
-          console.log(data);
-          $('#wordcloud_btn').prop('disabled','false');
-          $('#timeline_btn').prop('disabled','false');
-        })
-        .fail(function() {
-          console.log( "Twit - Process Error" );
-        })
-        .always(function() {
-          console.log( "Twit - Process Completed" );
-        });
-      });
-    </script>
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNOyqpoK1WaGwLhiZt6RV2An4ARxPL1j8&libraries=places&callback=initAutocomplete" async defer></script>
   
   </body>

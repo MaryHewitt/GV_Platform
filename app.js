@@ -11,29 +11,45 @@
 //http://stackoverflow.com/questions/29986571/cannot-get-when-trying-to-connect-to-localhost8080-in-node-js
 //http://expressjs.com/en/starter/static-files.html
 //http://stackoverflow.com/questions/26079611/node-js-typeerror-path-must-be-absolute-or-specify-root-to-res-sendfile-failed
+//https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4
+
+
 
 var express = require('express');
 var app = express();
 
 var router = express.Router();
-//require("./routes/twitter")(router);
-app.use("./api",router);
 
-app.use(express.static(__dirname +'/public'));
-//app.use(express.static(__dirname +'/javascripts'));
-//app.use(express.static(__dirname +'/stylesheets'));
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+router.use(function (req, res, next) {
+  console.log(req.method, req.url);
   next();
 });
+
+router.get('/about', function(req, res) {
+  res.send("I'm on the about page!");
+});
+
+router.post('/about', function(req, res) {
+  console.log('Posting');
+  res.send('Hello post!');
+  next();
+});
+
+app.use('/', router);
+
+app.use(express.static(__dirname +'/public'));
 
 app.get('/', function(req, res, next) {
   res.sendFile(__dirname + '/Twitter_Platform.html');
 });
 
-var allowCrossDomain = function(req, response, next) {
+/*app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});*/
+
+/*var allowCrossDomain = function(req, response, next) {
   response.header('Access-Control-Allow-Origin', "http://localhost");
   response.header('Access-Control-Allow-Methods', 'OPTIONS, GET,PUT,POST,DELETE');
   response.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -46,14 +62,10 @@ var allowCrossDomain = function(req, response, next) {
   }
 };
 
-/*app.configure(function() {
+app.configure(function() {
     app.use(allowCrossDomain);
   //Parses the JSON object given in the body request
     app.use(express.bodyParser());
-});*/
-
-/*app.get('/routes/twitter', function(req, res) {
-  console.log('Twitter Search Button Pressed!');
 });*/
 
 console.log('Server is running!');
