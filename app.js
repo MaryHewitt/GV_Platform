@@ -14,7 +14,7 @@ var express = require('express');
 var app = express();
 
 var router = express.Router();
-require("./routes/twitter")(router);
+//require("./routes/twitter")(router);
 app.use("./api",router);
 
 app.use(function(req, res, next) {
@@ -40,15 +40,15 @@ var allowCrossDomain = function(req, response, next) {
   }
 };
 
-app.configure(function() {
+/*app.configure(function() {
     app.use(allowCrossDomain);
   //Parses the JSON object given in the body request
     app.use(express.bodyParser());
-});
+});*/
 
-app.get('/routes/twitter', function(req, res) {
+/*app.get('/routes/twitter', function(req, res) {
   console.log('Twitter Search Button Pressed!');
-});
+});*/
 
 console.log('Server is running!');
 
