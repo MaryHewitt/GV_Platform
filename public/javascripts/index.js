@@ -1,6 +1,4 @@
-$(document).ready(function(){  
-
-  //GLOBAL VARIABLES:
+//GLOBAL VARIABLES:
   var latitude = null;
   var longitude = null;
   var marker = null;
@@ -9,6 +7,73 @@ $(document).ready(function(){
   var country = null;
   var woeid = null;
   var keyword = "traffic";
+
+//Google Map APIs
+//Code adapted from:
+//https://developers.google.com/maps/documentation/javascript/places-autocomplete?authuser=1#places_searchbox
+//https://google-developers.appspot.com/maps/documentation/javascript/examples/geocoding-reverse
+
+function geocodeLatLng(latitude, longitude) {
+  var geocoder = new google.maps.Geocoder;
+  var latlng = {lat: latitude, lng: longitude};
+    geocoder.geocode({'location': latlng}, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        console.log(results);
+        country = results[6].formatted_address;
+        suburb = results[1].address_components[0].long_name;
+        var address = results[1].formatted_address;
+        var data = results[1].address_components;
+
+        $.each(data, function(index0, i){
+          postcode = i.long_name; //make sure it gets the last address component in all cases
+        });
+
+        //console.log(postcode);
+        if (postcode == "Australia") {
+          alert("Perhaps this isn't the best place to look for tweets? Try another location?");
+        } else {
+          $('#statbox').append('\nAddress: ' + address);
+          getWOEID();
+        }
+
+      } else {
+        window.alert('No results found');
+      }
+    }); 
+}
+
+//WOEID RETRIEVAL:
+//Referenced from:
+//https://developer.yahoo.com/geo/geoplanet/guide/api_docs.html#api_overview
+//https://developer.yahoo.com/geo/geoplanet/guide/yql-tables.html#yql-summary
+
+function getWOEID(){
+  var pcURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22" + suburb + "%22&format=xml"
+  $.get(pcURL, function(){
+    console.log("WOEID Retrieval - Process Initiated");
+  })
+    .done(function(data){
+      console.log("WOEID Retreival - WOEID Found");
+      console.log(data);
+
+      //Adapted from: http://code.tutsplus.com/tutorials/quick-tip-use-jquery-to-retrieve-data-from-an-xml-file--net-390
+      $(data).find('woeid').each(function(){
+        var $woeid = $(this); 
+        woeid = ($woeid[0].textContent);
+        //console.log(woeid);
+      });
+
+    })
+    .fail(function() {
+      console.log( "WOEID Retrieval - Process Error" );
+    })
+    .always(function() {
+      console.log( "WOEID Retreival - Process Complete" );
+      $('#statbox').append('\n\nWOEID: ' + woeid);
+    })
+};
+
+$(document).ready(function(){  
 
   //TEST BUTTON AJAX:
   //===============================================
@@ -56,37 +121,6 @@ $(document).ready(function(){
       console.log( "Twit - Process Completed" );
     });
   });
-
-  //WOEID RETRIEVAL:
-  //Referenced from:
-  //https://developer.yahoo.com/geo/geoplanet/guide/api_docs.html#api_overview
-  //https://developer.yahoo.com/geo/geoplanet/guide/yql-tables.html#yql-summary
-
-  function getWOEID(){
-    var pcURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22" + suburb + "%22&format=xml"
-    $.get(pcURL, function(){
-      console.log("WOEID Retrieval - Process Initiated");
-    })
-      .done(function(data){
-        console.log("WOEID Retreival - WOEID Found");
-        console.log(data);
-
-        //Adapted from: http://code.tutsplus.com/tutorials/quick-tip-use-jquery-to-retrieve-data-from-an-xml-file--net-390
-        $(data).find('woeid').each(function(){
-          var $woeid = $(this); 
-          woeid = ($woeid[0].textContent);
-          //console.log(woeid);
-        });
-
-      })
-      .fail(function() {
-        console.log( "WOEID Retrieval - Process Error" );
-      })
-      .always(function() {
-        console.log( "WOEID Retreival - Process Complete" );
-        $('#statbox').append('\n\nWOEID: ' + woeid);
-      })
-  };
 
   //Authentication Token 1.0a AJAX:
   //Referenced from:
@@ -277,41 +311,6 @@ $(document).ready(function(){
   $('#wc_close').click(function(){
     $('#wordcloud').hide();
   });
-
-  //Google Map APIs
-  //Code adapted from:
-  //https://developers.google.com/maps/documentation/javascript/places-autocomplete?authuser=1#places_searchbox
-  //https://google-developers.appspot.com/maps/documentation/javascript/examples/geocoding-reverse
-
-  function geocodeLatLng(latitude, longitude) {
-    var geocoder = new google.maps.Geocoder;
-    var latlng = {lat: latitude, lng: longitude};
-      geocoder.geocode({'location': latlng}, function(results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-          console.log(results);
-          country = results[6].formatted_address;
-          suburb = results[1].address_components[0].long_name;
-          var address = results[1].formatted_address;
-          var data = results[1].address_components;
-
-          $.each(data, function(index0, i){
-            postcode = i.long_name; //make sure it gets the last address component in all cases
-          });
-
-          //console.log(postcode);
-          if (postcode == "Australia") {
-            alert("Perhaps this isn't the best place to look for tweets? Try another location?");
-          } else {
-            $('#statbox').append('\nAddress: ' + address);
-            getWOEID();
-          }
-
-        } else {
-          window.alert('No results found');
-        }
-      });
-    
-  }
 
 });
 

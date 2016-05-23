@@ -39,21 +39,25 @@ router.post('/test', function(req, res, next) {
 
 router.post('/twitter', function(req, res, next) {
   console.log('Posting to Twitter');
-  res.send('Hello POST! Twitter Success!');
+  //res.send('Hello POST! Twitter Success!');
 
   var Twit = require('twit');
 
-    var T = new Twit({
-      consumer_key:         'w66tWmtsphzxLdUJpS03cVKuE',
-      consumer_secret:      'BOJ4VxwsgJVjuhWIEQIslCRUrud83gVmEJKnGNv4xaysc1kv91',
-      access_token:         '389868811-hALJlOtoPVFm9kymPexSiEgevwtI3S6dNhDMLWmQ',
-      access_token_secret:  '31TWHRd6w8UWFEHmNMBZcCbZuU1XqqSbCoD2APMPynZVp',
-      timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
-    });
+  var T = new Twit({
+    consumer_key:         'w66tWmtsphzxLdUJpS03cVKuE',
+    consumer_secret:      'BOJ4VxwsgJVjuhWIEQIslCRUrud83gVmEJKnGNv4xaysc1kv91',
+    access_token:         '389868811-hALJlOtoPVFm9kymPexSiEgevwtI3S6dNhDMLWmQ',
+    access_token_secret:  '31TWHRd6w8UWFEHmNMBZcCbZuU1XqqSbCoD2APMPynZVp',
+    timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+  });
 
-    T.get('search/tweets', { q: 'fire', locations: ['-31.9535', '115.8570'], language: 'en', count: 100 }, function(err, data, response) {
-      console.log(data);
-    });
+  T.get('search/tweets', { q: 'fire', locations: ['-31.9535', '115.8570'], language: 'en', count: 10 }, function(err, data, response) {
+    console.log(data);
+  });
+
+  /*T.get('trends/place', {id: 22722055}, function(err, data) {
+    console.log(data);
+  });*/
 
   next();
 });
