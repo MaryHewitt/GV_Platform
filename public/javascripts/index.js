@@ -338,7 +338,9 @@ function initAutocomplete() {
   //http://stackoverflow.com/questions/2770421/how-retrieve-latitude-and-longitude-via-google-maps-api
 
   google.maps.event.addListener(map, 'click', function(event) {
-    $('#statbox').text('Latitude: ' + event.latLng.lat() + '\n Longitude: ' + event.latLng.lng());
+    //$('#statbox').text('Latitude: ' + event.latLng.lat() + '\n Longitude: ' + event.latLng.lng());
+    $('#lat_input').val(event.latLng.lat());
+    $('#long_input').val(event.latLng.lng());
     latitude = event.latLng.lat(); //for use in Twitter API
     longitude = event.latLng.lng(); //for use in Twitter API
     createMarker(event.latLng);
@@ -348,16 +350,31 @@ function initAutocomplete() {
   //This section adapted from:
   //http://www.geocodezip.com/v3_example_click2add_infowindow.html
   //http://stackoverflow.com/questions/3684274/googlemaps-v3-api-create-only-1-marker-on-click
+  //http://stackoverflow.com/questions/825794/draw-radius-around-a-point-in-google-map
 
   function createMarker(location) {
     var myLatlng = new google.maps.LatLng(latitude,longitude);
+    var radius_int = parseInt($('#radius_input').val());
+    console.log(radius_int);
     if (marker) {
       marker.setPosition(location);
+      circle.setRadius(radius_int); 
     } else {
       marker = new google.maps.Marker({
         position: myLatlng,
         map: map
       });
+      var circle = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: map,
+        center: myLatlng,
+        radius: radius_int
+      });
+      circle.bindTo('center', marker, 'position');
     }
       //console.log(marker);
       marker.setMap(map);

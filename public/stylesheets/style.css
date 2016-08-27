@@ -17,6 +17,9 @@ html, body {
   border-color: #008CBA;
   background-color: white;
 }
+.text{
+  width: 150px;
+}
 #map {
   height: 100%;
   width: 80%;
