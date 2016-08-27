@@ -6,9 +6,10 @@
     <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-
-    <script src="./javascripts/d3.layout.cloud.js"></script>
+    
+    <!--<script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="./javascripts/d3.layout.cloud.js"></script>-->
+    
     <script src="./javascripts/index.js"></script>
 
     <title>Twitter Geovisualisation</title>
@@ -22,30 +23,25 @@
 
     <div id="databox">
       <div id="controlbox">Controls:<br>
-        <!--<input type="button" id="trends" value="Show Trends"></input>-->
-        <!--<input type="button" id="twitter" value="Run Twitter Geolocation"></input>-->
-        <!--<input type="button" id="oauth" value="Get oAuth Token"></input>-->
+        <label>Radius of Search (km):</label>
+        <input type="text" id="radius"></input>
         <input type="button" id="twit_btn" class = "button"  value="Retrieve Tweets"></input><br>
-        <br><br>
-        <input type="button" id="test_btn" class = "button"  value="Test"></input><br>
-        <input type="button" id="timeline_btn" class = "button"  value="Show Timeline" disabled></input><br>
-        <input type="button" id="wordcloud_btn" class = "button"  value="Show Wordcloud" disabled></input>
       </div>
       <div id="statbox">Click on the map to explore!</div>
-      <div id="wordcloud" hidden>
+      <!--<div id="wordcloud" hidden>
         <div class = "cross">
         <image id = "wc_close" class = "close" src = "./images/cross.png" alt = "close_btn" style = "width:10px;height:10px;"></image>
         </div>
-      </div>
+      </div>-->
       <div id="details">Created by Mary Hewitt</div>
     </div>
 
-    <div id = "time_vis" hidden> hello
+    <!--<div id = "time_vis" hidden> hello
       <div class = "cross">
         <image id = "tl_close" class = "close" src = "./images/cross.png" alt = "close_btn" style = "width:20px;height:20px;"></image>
       </div>
       <div id = "timeline"></div>
-    </div>
+    </div>-->
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNOyqpoK1WaGwLhiZt6RV2An4ARxPL1j8&libraries=places&callback=initAutocomplete" async defer></script>
   

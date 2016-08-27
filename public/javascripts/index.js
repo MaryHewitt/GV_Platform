@@ -28,13 +28,13 @@ function geocodeLatLng(latitude, longitude) {
           postcode = i.long_name; //make sure it gets the last address component in all cases
         });
 
-        //console.log(postcode);
+        /*//console.log(postcode); //This bit gets WOEID's.
         if (postcode == "Australia") {
           alert("Perhaps this isn't the best place to look for tweets? Try another location?");
         } else {
           $('#statbox').append('\nAddress: ' + address);
           getWOEID();
-        }
+        }*/
 
       } else {
         window.alert('No results found');
@@ -47,7 +47,7 @@ function geocodeLatLng(latitude, longitude) {
 //https://developer.yahoo.com/geo/geoplanet/guide/api_docs.html#api_overview
 //https://developer.yahoo.com/geo/geoplanet/guide/yql-tables.html#yql-summary
 
-function getWOEID(){
+/*function getWOEID(){
   var pcURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22" + suburb + "%22&format=xml"
   $.get(pcURL, function(){
     console.log("WOEID Retrieval - Process Initiated");
@@ -71,14 +71,14 @@ function getWOEID(){
       console.log( "WOEID Retreival - Process Complete" );
       $('#statbox').append('\n\nWOEID: ' + woeid);
     })
-};
+};*/
 
 $(document).ready(function(){  
 
   //TEST BUTTON AJAX:
   //===============================================
 
-  $('#test_btn').click(function(){
+  /*$('#test_btn').click(function(){
     console.log('Test Button!');
     $.ajax({
       method: "POST",
@@ -94,7 +94,7 @@ $(document).ready(function(){
     .always(function() {
       console.log( "TEST - Completed" );
     });
-  });
+  });*/
 
 
   //Twit NPM
@@ -105,7 +105,7 @@ $(document).ready(function(){
     console.log('Twit Button Pressed');
     $.ajax({
       method: "POST",
-      url: "http://localhost:5000/test"
+      url: "http://localhost:5000/twitter"
     })
     .done(function(data) {
       console.log( "Twit - Process Success" );
@@ -127,7 +127,7 @@ $(document).ready(function(){
   //https://dev.twitter.com/oauth/application-only
   //Base64 Encoding function: https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/btoa
 
-  $('#oauth').click(function() {
+  /*$('#oauth').click(function() {
     getAuthToken();
   });
 
@@ -159,11 +159,11 @@ $(document).ready(function(){
       .always(function() {
         console.log( "Authentication Token - Process Completed" );
       });
-  }
+  }*/
 
   //Twitter Geolocation AJAX:
 
-  $("#twitter").click(function() {
+  /*$("#twitter").click(function() {
     $.ajax({
       method: "GET",
       url: "https://api.twitter.com/1.1/geo/search.json?query="+ keyword +"lat=" + latitude + "&long=" + longitude +"&accuracy=100m",
@@ -178,7 +178,7 @@ $(document).ready(function(){
       .always(function() {
         console.log( "Twitter Geolocation - Process Completed" );
       });
-  });
+  });*/
 
   //Reference: 
   //https://dev.twitter.com/rest/reference/get/trends/place
@@ -237,7 +237,7 @@ $(document).ready(function(){
   //TIME-LINE:
   //vis.js
 
-  $('#timeline_btn').click(function(){
+  /*$('#timeline_btn').click(function(){
     
     $('#time_vis').show();
     //Below isn't working, does it need to be done via node server?
@@ -256,19 +256,19 @@ $(document).ready(function(){
     var options = {};
 
     // Create a Timeline
-    var timeline = new vis.Timeline(container, items, options);*/
+    var timeline = new vis.Timeline(container, items, options);
 
   });
 
   $('#tl_close').click(function(){
     $('#time_vis').hide();
-  });
+  });*/
 
   //WORD-CLOUD:
   //Adapted from the following question:
   //http://stackoverflow.com/questions/27672989/dynamically-sized-word-cloud-using-d3-cloud
 
-  $('#wordcloud_btn').click(function(){
+  /*$('#wordcloud_btn').click(function(){
     $('#wordcloud').show();
   });
 
@@ -310,7 +310,7 @@ $(document).ready(function(){
 
   $('#wc_close').click(function(){
     $('#wordcloud').hide();
-  });
+  });*/
 
 });
 
