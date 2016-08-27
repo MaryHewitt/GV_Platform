@@ -35,7 +35,7 @@ html, body {
   font-size: 15px;
   font-weight: 300;
 }
-#statbox{
+#statbox, #page_info{
   height: 10.5%;
   float: top;
   padding: 10px;
