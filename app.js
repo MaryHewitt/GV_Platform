@@ -51,7 +51,7 @@ router.post('/twitter', function(req, res, next) {
     timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
   });
 
-  T.get('search/tweets', { q: 'fire', locations: ['-31.9535', '115.8570'], language: 'en', count: 10 }, function(err, data, response) {
+  T.get('search/tweets', { q: 'traffic', geocode: ['-31.9535', '115.8570', '1000km'], language: 'en', count: 10 }, function(err, data, response) {
     console.log(data);
   });
 
@@ -74,6 +74,16 @@ var port = 5000;
 app.listen( port, function() {
   console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
 });
+
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+
+var url = 'mongodb://localhost:27017/test';
+MongoClient.connect(url, function(err,db){
+  assert.equal(null, err);
+  console.log('Connected successfully with server.');
+  db.close();
+})
 
 
 
