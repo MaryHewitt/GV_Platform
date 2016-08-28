@@ -2,6 +2,7 @@
   var latitude = null;
   var longitude = null;
   var marker = null;
+  var circle = null;
   var postcode = null;
   var suburb = null;
   var country = null;
@@ -314,6 +315,7 @@ $(document).ready(function(){
 
 });
 
+
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -31.9535, lng: 115.8570},
@@ -347,6 +349,16 @@ function initAutocomplete() {
     geocodeLatLng(latitude, longitude);
   });
 
+  //Event to promote refresh of marker on change of Latitude/Longitude/Radius values:
+  //Note requirement to check values prior to this.
+
+  $('#controlbox').change(function() {
+    createMarker(new google.maps.LatLng(($('#lat_input').val()), ($('#long_input').val())));
+    map.setCenter(new google.maps.LatLng(($('#lat_input').val()), ($('#long_input').val())));
+    console.log('Latitude: ' + $('#lat_input').val());
+    console.log('Longitude: ' + $('#long_input').val());
+  });
+
   //This section adapted from:
   //http://www.geocodezip.com/v3_example_click2add_infowindow.html
   //http://stackoverflow.com/questions/3684274/googlemaps-v3-api-create-only-1-marker-on-click
@@ -354,7 +366,7 @@ function initAutocomplete() {
 
   function createMarker(location) {
     var myLatlng = new google.maps.LatLng(latitude,longitude);
-    var radius_int = parseInt($('#radius_input').val());
+    var radius_int = parseInt($('#radius_input').val()); //need to add a try/catch here
     console.log(radius_int);
     if (marker) {
       marker.setPosition(location);
@@ -364,7 +376,7 @@ function initAutocomplete() {
         position: myLatlng,
         map: map
       });
-      var circle = new google.maps.Circle({
+      circle = new google.maps.Circle({
         strokeColor: '#FF0000',
         strokeOpacity: 0.8,
         strokeWeight: 2,
