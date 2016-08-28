@@ -15,11 +15,17 @@
 //?//http://blog.landspurg.net/node-js-tutorial-real-time-geolocalized-tweets/
 //?//http://blog.safe.com/2014/03/twitter-stream-api-map/
 //https://docs.mongodb.com/getting-started/node/client/
-
+//http://stackoverflow.com/questions/5710358/how-to-retrieve-post-query-parameters-in-express
 
 
 var express = require('express');
 var app = express();
+
+var bodyParser = require ('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 var router = express.Router();
 
@@ -39,8 +45,14 @@ router.post('/test', function(req, res, next) {
 });
 
 router.post('/twitter', function(req, res, next) {
+  var query = req.body.query;
+  var lat = req.body.lat;
+  var lng = req.body.lng;
+  var rad = req.body.rad + 'km';
   console.log('Posting to Twitter');
-  //res.send('Hello POST! Twitter Success!');
+  //console.log(req);
+  console.log('Query values: ' + query + '; ' + lat + '; ' + lng + '; ' + rad);
+  res.send('Hello POST! Twitter Success!');
 
   var Twit = require('twit');
 
@@ -52,8 +64,10 @@ router.post('/twitter', function(req, res, next) {
     timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
   });
 
-  T.get('search/tweets', { q: 'traffic', geocode: ['-31.9535', '115.8570', '1000km'], language: 'en', count: 100 }, function(err, data, response) {
+  T.get('search/tweets', { q: query, geocode: [lat, lng, rad], language: 'en', count: 100 }, function(err, data, response) {
+    console.log('Data Retrieval Start');
     console.log(data);
+    console.log('Data Retrieval Complete');
   });
 
   /*T.get('trends/place', {id: 22722055}, function(err, data) {

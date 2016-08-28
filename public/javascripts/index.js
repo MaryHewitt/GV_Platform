@@ -106,14 +106,20 @@ $(document).ready(function(){
     console.log('Twit Button Pressed');
     $.ajax({
       method: "POST",
-      url: "http://localhost:5000/twitter"
+      url: "http://localhost:5000/twitter",
+      data: {
+        "query": $('#query_val').val(), 
+        "lat": $('#lat_input').val(),
+        "lng": $('#long_input').val(),
+        "rad": $('#radius_input').val()
+      }
     })
     .done(function(data) {
       console.log( "Twit - Process Success" );
       console.log(data);
-      $('#wordcloud_btn').removeAttr('disabled');
-      $('#timeline_btn').removeAttr('disabled');
-      createWC();
+      //$('#wordcloud_btn').removeAttr('disabled');
+      //$('#timeline_btn').removeAttr('disabled');
+      //createWC();
     })
     .fail(function() {
       console.log( "Twit - Process Error" );
@@ -353,21 +359,28 @@ function initAutocomplete() {
   //Note requirement to check values prior to this.
 
   $('#controlbox').change(function() {
-    createMarker(new google.maps.LatLng(($('#lat_input').val()), ($('#long_input').val())));
-    map.setCenter(new google.maps.LatLng(($('#lat_input').val()), ($('#long_input').val())));
-    console.log('Latitude: ' + $('#lat_input').val());
-    console.log('Longitude: ' + $('#long_input').val());
+    //Check input values are numeric for Latitude, Longitude and Radius:
+    if ($.isNumeric($('.num_input').val()) == true) {
+      createMarker(new google.maps.LatLng(($('#lat_input').val()), ($('#long_input').val())));
+      map.setCenter(new google.maps.LatLng(($('#lat_input').val()), ($('#long_input').val())));
+      console.log('Latitude: ' + $('#lat_input').val());
+      console.log('Longitude: ' + $('#long_input').val());
+    } else {
+      alert('Please input only numerical values.');
+    };
+
   });
 
   //This section adapted from:
   //http://www.geocodezip.com/v3_example_click2add_infowindow.html
   //http://stackoverflow.com/questions/3684274/googlemaps-v3-api-create-only-1-marker-on-click
   //http://stackoverflow.com/questions/825794/draw-radius-around-a-point-in-google-map
+  //https://developers.google.com/maps/documentation/javascript/shapes#circles
 
   function createMarker(location) {
     var myLatlng = new google.maps.LatLng(latitude,longitude);
-    var radius_int = parseInt($('#radius_input').val()); //need to add a try/catch here
-    console.log(radius_int);
+    var radius_int = parseInt($('#radius_input').val());
+
     if (marker) {
       marker.setPosition(location);
       circle.setRadius(radius_int); 
