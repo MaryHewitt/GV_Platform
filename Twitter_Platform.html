@@ -23,20 +23,35 @@
 
     <div id="databox">
       <div id="page_info">
-        <br><br><b>Twitter Explorer</b><br><br>
+        <br><br><b>Twitter Explorer</b>
+        <input type="button" id="help_btn" class = "help"  value="Help"></input>
       </div>
       <div id="controlbox">
         <label>Latitude:</label><br>
-        <input type="text" class ="num_input" id="lat_input"></input><br>
+        <input type="text" class="num_input" id="lat_input" required></input><br><br>
         <label>Longitude:</label><br>
-        <input type="text" class ="num_input" id="long_input"></input><br>
-        <label>Radius of Search (m):</label><br>
-        <input type="text" class ="num_input" id="radius_input" value="1000"></input><br>
-        <label>Query Value(s):</label><br>
-        <input type="text" class ="text" id="query_val"></input><br><br>
-        <input type="button" id="twit_btn" class = "button"  value="Retrieve Tweets"></input><br>
+        <input type="text" class="num_input" id="long_input" required></input><br><br>
+        <label>Radius of Search (m):</label>
+        <image id = "how_radius" class = "question" src = "./images/help.png" alt = "question_mark" style = "width:10px;height:10px;"></image><br>
+        <!--Question mark icon from: 
+        https://www.iconfinder.com/icons/340236/about_faq_query_question_mark_sql_status_support_icon-->
+        <input type="text" class="num_input" id="radius_input" value="1000" required></input><br><br>
+        <label>Keyword(s):</label>
+        <image id = "how_keywords" class = "question" src = "./images/help.png" alt = "question_mark" style = "width:10px;height:10px;"></image><br>
+        <input type="text" class="text" id="query_val"></input><br><br>
+        <input type="button" id="twit_btn" class = "button"  value="Search for Tweets"></input><br>
+        <div id="duration_search"></div>
       </div>
-      <div id="statbox">Click on the map to explore!</div>
+      <div id="topics">
+        <b>Analysed Topic Layers:</b><br>
+        <image id = "loading" class = "loading" src = "./images/loading.gif" alt = "loading_gif" style = "width:100px;height:100px;" hidden></image><br>
+        <!--Gif originally posted from: http://imgur.com/gallery/GCNyjJY-->
+        <div id="checkboxes">
+          <input type="checkbox" class="topic" id="topic1" value="Traffic">Traffic</input><br><br>
+          <input type="checkbox" class="topic" id="topic2" value="Weather">Weather</input><br><br>
+          <input type="checkbox" class="topic" id="topic3" value="University">University</input><br><br>
+        </div>
+      </div>
       <!--<div id="wordcloud" hidden>
         <div class = "cross">
         <image id = "wc_close" class = "close" src = "./images/cross.png" alt = "close_btn" style = "width:10px;height:10px;"></image>

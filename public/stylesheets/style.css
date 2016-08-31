@@ -17,12 +17,26 @@ html, body {
   border-color: #008CBA;
   background-color: white;
 }
-.text{
-  width: 150px;
+.help{
+  width: 50px;
+  float: right;
+  padding: 5px;
+  font-size: 15px;
+  font-weight: 300;
+  font-family: Roboto;
+  border-color: white;
+  background-color: white;
+}
+.help:hover{
+  border-color: #008CBA;
+  background-color: white;
+}
+.text, .num_input{
+  width: 200px;
 }
 #map {
   height: 100%;
-  width: 80%;
+  width: 83.5%;
   float: left;
   border-right: solid;
   border-right-width: 4px;
@@ -31,7 +45,7 @@ html, body {
 }
 #databox{
   height: 100%;
-  width: 19.72%;
+  width: 16.22%;
   float: right;
   background-color: grey;
   font-family: Roboto;
@@ -51,8 +65,8 @@ html, body {
   font-size: 15px;
   font-weight: 300;
 }
-#wordcloud, #controlbox{
-  height: 25%;
+#topics, #controlbox{
+  height: 33.5%;
   float: top;
   padding: 10px;
   border: solid;
@@ -64,8 +78,11 @@ html, body {
   font-size: 15px;
   font-weight: 300;
 }
-.cross{
+.cross, .loading, .question{
   float: right;
+}
+.button:hover, .help:hover, .question:hover, .topic:hover{
+  cursor: pointer;
 }
 #time_vis{
   bottom: 0px;

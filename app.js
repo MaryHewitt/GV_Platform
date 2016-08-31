@@ -40,7 +40,7 @@ router.get('/test', function(req, res) {
 
 router.post('/test', function(req, res, next) {
   console.log('Posting to test');
-  res.send('Hello POST! Test Success!');
+  res.send('Accessing Node Server...');
   next();
 });
 
@@ -51,8 +51,7 @@ router.post('/twitter', function(req, res, next) {
   var rad = req.body.rad + 'km';
   console.log('Posting to Twitter');
   //console.log(req);
-  console.log('Query values: ' + query + '; ' + lat + '; ' + lng + '; ' + rad);
-  res.send('Hello POST! Twitter Success!');
+  console.log('QUERY VALUES: ' + query + '; ' + lat + '; ' + lng + '; ' + rad);
 
   var Twit = require('twit');
 
@@ -65,10 +64,16 @@ router.post('/twitter', function(req, res, next) {
   });
 
   T.get('search/tweets', { q: query, geocode: [lat, lng, rad], language: 'en', count: 100 }, function(err, data, response) {
-    console.log('Data Retrieval Start');
+    console.log('DATA RETRIEVAL START');
+    //res.json(data);
     console.log(data);
-    console.log('Data Retrieval Complete');
+    console.log('DATA RETRIEVAL COMPLETE');
+    next();
   });
+
+  res.send('Accessing Node Server...');
+  //res.json(data);
+
 
   /*T.get('trends/place', {id: 22722055}, function(err, data) {
     console.log(data);

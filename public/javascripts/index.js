@@ -19,7 +19,7 @@ function geocodeLatLng(latitude, longitude) {
   var latlng = {lat: latitude, lng: longitude};
     geocoder.geocode({'location': latlng}, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
-        console.log(results);
+        //console.log(results);
         country = results[6].formatted_address;
         suburb = results[1].address_components[0].long_name;
         var address = results[1].formatted_address;
@@ -76,6 +76,24 @@ function geocodeLatLng(latitude, longitude) {
 
 $(document).ready(function(){  
 
+  $('#help_btn').click(function() {
+    alert(
+      'Help text here, hello!'
+      )
+  });
+
+  $('#how_keywords').click(function() {
+    alert(
+      'If you want to enter more than one keyword, seperate them using a comma (",")'
+      )
+  });
+
+  $('#how_radius').click(function() {
+    alert(
+      'The minimum possible radius is 10000m and the maximum possible radius is 500m.'
+      )
+  });
+
   //TEST BUTTON AJAX:
   //===============================================
 
@@ -103,7 +121,9 @@ $(document).ready(function(){
   //https://github.com/ttezel/twit
 
   $('#twit_btn').click(function() {  //Trying to use node server and use Twit
-    console.log('Twit Button Pressed');
+    //console.log('Twit Button Pressed');
+    //$('#loading').show()
+    var start = $.now();
     $.ajax({
       method: "POST",
       url: "http://localhost:5000/twitter",
@@ -115,17 +135,19 @@ $(document).ready(function(){
       }
     })
     .done(function(data) {
-      console.log( "Twit - Process Success" );
+      console.log( "SUCCESS - Twit" );
       console.log(data);
+      var end = $.now();
+      $('#duration_search').html('<i>Search Completed in ' + (end-start) + 'ms</i>');
       //$('#wordcloud_btn').removeAttr('disabled');
       //$('#timeline_btn').removeAttr('disabled');
       //createWC();
     })
     .fail(function() {
-      console.log( "Twit - Process Error" );
+      console.log( "ERROR - Twit" );
     })
     .always(function() {
-      console.log( "Twit - Process Completed" );
+      console.log( "END - Twit" );
     });
   });
 
@@ -363,8 +385,8 @@ function initAutocomplete() {
     if ($.isNumeric($('.num_input').val()) == true) {
       createMarker(new google.maps.LatLng(($('#lat_input').val()), ($('#long_input').val())));
       map.setCenter(new google.maps.LatLng(($('#lat_input').val()), ($('#long_input').val())));
-      console.log('Latitude: ' + $('#lat_input').val());
-      console.log('Longitude: ' + $('#long_input').val());
+      //console.log('Latitude: ' + $('#lat_input').val());
+      //console.log('Longitude: ' + $('#long_input').val());
     } else {
       alert('Please input only numerical values.');
     };
