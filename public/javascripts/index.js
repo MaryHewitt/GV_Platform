@@ -139,6 +139,8 @@ $(document).ready(function(){
       console.log(data);
       var end = $.now();
       $('#duration_search').html('<i>Search Completed in ' + (end-start) + 'ms</i>');
+      //make twitter markers
+      //Twitter logo sourced from: http://int-galleries.com/vector/twitter-icon-logo-vector-free-download.php
       //$('#wordcloud_btn').removeAttr('disabled');
       //$('#timeline_btn').removeAttr('disabled');
       //createWC();
