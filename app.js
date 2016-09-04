@@ -44,12 +44,13 @@ router.post('/test', function(req, res, next) {
   next();
 });
 
+//TWITTER CALLS:
 router.post('/twitter', function(req, res, next) {
   var query = req.body.query;
   var lat = req.body.lat;
   var lng = req.body.lng;
   var rad = req.body.rad + 'km';
-  console.log('Posting to Twitter');
+  console.log('POSTing to Twitter');
   //console.log(req);
   console.log('QUERY VALUES: ' + query + '; ' + lat + '; ' + lng + '; ' + rad);
 
@@ -82,10 +83,9 @@ router.post('/twitter', function(req, res, next) {
   next();
 });
 
+//HOST WEBPAGE AT LOCALHOST:
 app.use('/', router);
-
 app.use(express.static(__dirname +'/public'));
-
 app.get('/', function(req, res, next) {
   res.sendFile(__dirname + '/Twitter_Platform.html');
 });
@@ -95,6 +95,7 @@ app.listen( port, function() {
   console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
 });
 
+//MONGODB CONNECTION CHECK:
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
