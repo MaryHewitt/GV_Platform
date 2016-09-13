@@ -66,12 +66,15 @@ router.post('/twitter', function(req, res, next) {
 
   T.get('search/tweets', { q: query, geocode: [lat, lng, rad], language: 'en', count: 100 }, function(err, data, response) {
     console.log('DATA RETRIEVAL START');
-    //res.json(data);
-    console.log(data);
+    //console.log(data);
+    //console.log(err);
+    //console.log(response);
+    //res.send(data);
     console.log('DATA RETRIEVAL COMPLETE');
-    next();
+    //next(data);
   });
 
+  //res.send(data);
   res.send('Accessing Node Server...');
   //res.json(data);
 
@@ -95,7 +98,7 @@ app.listen( port, function() {
   console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
 });
 
-//MONGODB CONNECTION CHECK:
+/*//MONGODB CONNECTION CHECK:
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
@@ -104,7 +107,7 @@ MongoClient.connect(url, function(err,db){
   assert.equal(null, err);
   console.log('Connected successfully with server.');
   db.close();
-})
+})*/
 
 
 
