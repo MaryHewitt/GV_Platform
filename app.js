@@ -66,7 +66,7 @@ router.post('/twitter', function(req, res, next) {
 
   T.get('search/tweets', { q: query, geocode: [lat, lng, rad], language: 'en', count: 100 }, function(err, data, response) {
     console.log('DATA RETRIEVAL START');
-    //console.log(data);
+    console.log(data);
     //console.log(err);
     //console.log(response);
     //res.send(data);

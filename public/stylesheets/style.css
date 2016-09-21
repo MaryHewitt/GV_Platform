@@ -53,7 +53,7 @@ html, body {
   font-weight: 300;
 }
 #statbox, #page_info{
-  height: 10.5%;
+  height: 5.5%;
   float: top;
   padding: 10px;
   border: solid;
@@ -66,7 +66,6 @@ html, body {
   font-weight: 300;
 }
 #topics, #controlbox{
-  height: 33.5%;
   float: top;
   padding: 10px;
   border: solid;
@@ -77,6 +76,12 @@ html, body {
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
+}
+#topics {
+  height: 25%;
+}
+#controlbox{
+  height: 46.5%;
 }
 .cross, .loading, .question{
   float: right;

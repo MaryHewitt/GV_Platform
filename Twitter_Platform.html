@@ -12,7 +12,7 @@
     
     <script src="./javascripts/index.js"></script>
 
-    <title>Twitter Geovisualisation</title>
+    <title>Social Analytics Platform</title>
     
   </head>
 
@@ -22,15 +22,24 @@
     <div id="map"></div>
 
     <div id="databox">
+      
       <div id="page_info">
-        <br><br><b>Twitter Explorer</b>
+        <b>Social Analytics</b><br>
+        <b>Platform</b>
         <input type="button" id="help_btn" class = "help"  value="Help"></input>
       </div>
+
       <div id="controlbox">
         <label>Latitude:</label><br>
         <input type="text" class="num_input" id="lat_input" required></input><br><br>
         <label>Longitude:</label><br>
         <input type="text" class="num_input" id="long_input" required></input><br><br>
+        <label>After date:</label>
+        <image id = "date_since_how" class = "question" src = "./images/help.png" alt = "question_mark" style = "width:10px;height:10px;"></image><br>
+        <input type="date" class="num_input" id="date_since" required></input><br><br>
+        <label>Before date:</label>
+        <image id = "date_until_how" class = "question" src = "./images/help.png" alt = "question_mark" style = "width:10px;height:10px;"></image><br>
+        <input type="date" class="num_input" id="date_until" required></input><br><br>
         <label>Radius of Search (m):</label>
         <image id = "how_radius" class = "question" src = "./images/help.png" alt = "question_mark" style = "width:10px;height:10px;"></image><br>
         <!--Question mark icon from: 
@@ -39,10 +48,11 @@
         <label>Keyword(s):</label>
         <image id = "how_keywords" class = "question" src = "./images/help.png" alt = "question_mark" style = "width:10px;height:10px;"></image><br>
         <input type="text" class="text" id="query_val"></input><br><br>
-        <input type="button" id="twit_btn" class = "button"  value="Search for Tweets"></input><br>
+        <input type="submit" id="twit_btn" class = "button"  value="Search for Tweets"></input><br>
         <div id="duration_search"></div>
       </div>
-      <div id="topics">
+
+      <div id="topics" hidden>
         <b>Analysed Topic Layers:</b><br>
         <image id = "loading" class = "loading" src = "./images/loading.gif" alt = "loading_gif" style = "width:100px;height:100px;" hidden></image><br>
         <!--Gif originally posted from: http://imgur.com/gallery/GCNyjJY-->
@@ -52,6 +62,7 @@
           <input type="checkbox" class="topic" id="topic3" value="University">University</input><br><br>
         </div>
       </div>
+
       <!--<div id="wordcloud" hidden>
         <div class = "cross">
         <image id = "wc_close" class = "close" src = "./images/cross.png" alt = "close_btn" style = "width:10px;height:10px;"></image>
